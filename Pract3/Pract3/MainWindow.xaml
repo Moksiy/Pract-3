@@ -6,8 +6,19 @@
         xmlns:local="clr-namespace:Pract3"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <StackPanel HorizontalAlignment="Left" Height="38" VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0"/>
+    <Grid Background="#FFB7B7B7">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0" Background="#FF767676">
+            <Button Content="Файл" Margin="0,0,0,0.8" Width="52" Background="#FF767676" Click="Button_Click"/>
+        </StackPanel>
+        <ListView HorizontalAlignment="Left" Height="294" Margin="27,50,0,0" VerticalAlignment="Top" Width="741">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Title}"></GridViewColumn>
+                    <GridViewColumn></GridViewColumn>
+                    <GridViewColumn></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
 
     </Grid>
 </Window>
