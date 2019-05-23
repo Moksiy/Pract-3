@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.Win32;
+using System.IO;
 
 /*
 ПП3-2-1 Вывести с помощью ListView информацию о многоугольниках, что описаны в текстовом файле: в
@@ -42,11 +43,15 @@ namespace Pract3
     public class Data
     {
         public string FileName { get; set; }
+        List<Coordinate> Coord = new List<Coordinate>();
+        List<List<Coordinate>> list = new List<List<Coordinate>>();
+        List<Information> result = new List<Information>();
     }
 
     public partial class MainWindow : Window
     {
         Data data = new Data();
+
         public MainWindow()
         {
             InitializeComponent();
@@ -77,7 +82,13 @@ namespace Pract3
         //Считывание
         private void Reader()
         {
+            int x, y;
+            StreamReader reader = File.OpenText(data.FileName);
+            string input;
+            while ((input = reader.ReadLine()) != null)
+            {
 
+            }
         }
     }
 }
