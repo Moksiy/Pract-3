@@ -27,12 +27,6 @@ namespace Pract3
     /// Логика (её нет) взаимодействия для MainWindow.xaml
     /// </summary>
 
-    public class Coordinate
-    {
-        public int X { get; set; }
-        public int Y { get; set; }
-    }
-
     public class Information
     {
         public int Tops { get; set; }
@@ -43,8 +37,12 @@ namespace Pract3
     public class Data
     {
         public string FileName { get; set; }
-        List<Coordinate> Coord = new List<Coordinate>();
-        List<List<Coordinate>> list = new List<List<Coordinate>>();
+        public List<int> Coord = new List<int>();
+        public List<List<int>> list = new List<List<int>>();
+        public void AddCoordinates(int x)
+        {
+            list.Add(new List<int>(x));
+        }
         List<Information> result = new List<Information>();
     }
 
@@ -82,12 +80,17 @@ namespace Pract3
         //Считывание
         private void Reader()
         {
-            int x, y;
+            string x;
+            int i = 1;
             StreamReader reader = File.OpenText(data.FileName);
             string input;
             while ((input = reader.ReadLine()) != null)
             {
-
+                foreach (var st in input.Split())
+                {
+                    x = st;
+                    data.AddCoordinates(Convert.ToInt32(x));
+                }
             }
         }
     }
