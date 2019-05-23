@@ -13,11 +13,12 @@
         <ListView HorizontalAlignment="Left" Height="294" Margin="27,50,0,0" VerticalAlignment="Top" Width="741">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Title}"></GridViewColumn>
-                    <GridViewColumn></GridViewColumn>
-                    <GridViewColumn></GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Tops}" Width="240">Количество вершин</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=S}" Width="240">Площадь</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=P}" Width="240">Периметр</GridViewColumn>
                 </GridView>
             </ListView.View>
+            <ScrollViewer Height="100" Width="100"/>
         </ListView>
 
     </Grid>

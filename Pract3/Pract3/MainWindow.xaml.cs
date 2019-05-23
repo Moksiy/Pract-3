@@ -49,6 +49,7 @@ namespace Pract3
         //Обработчик на открытие диалогового окна
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
 
         }
     }
