@@ -28,19 +28,25 @@ namespace Pract3
 
     public class Coordinate
     {
-        int X { get; set; }
-        int Y { get; set; }
+        public int X { get; set; }
+        public int Y { get; set; }
     }
 
     public class Information
     {
-        int Tops { get; set; }
-        double S { get; set; }
-        double P { get; set; }
+        public int Tops { get; set; }
+        public double S { get; set; }
+        public double P { get; set; }
+    }
+
+    public class Data
+    {
+        public string FileName { get; set; }
     }
 
     public partial class MainWindow : Window
     {
+        Data data = new Data();
         public MainWindow()
         {
             InitializeComponent();
@@ -50,6 +56,27 @@ namespace Pract3
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
+            dialog.Filter = "Text documents (*.txt)|*.txt|All files (*.*)|*.*";
+            dialog.FilterIndex = 2;
+            Nullable<bool> result = dialog.ShowDialog();
+            if (result == true)
+            {
+                data.FileName = dialog.FileName;
+            }
+        }
+
+        //Обработчик считывания и вывода информации
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (data.FileName != null)
+            {
+                Reader();
+            }else { MessageBox.Show("Не выбран файл"); }
+        }
+
+        //Считывание
+        private void Reader()
+        {
 
         }
     }
