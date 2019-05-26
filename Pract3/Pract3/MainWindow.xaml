@@ -15,7 +15,7 @@
                 <GridView>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=Tops}" Width="140">Количество вершин</GridViewColumn>
                     <GridViewColumn DisplayMemberBinding="{Binding Path=S}" Width="140">Площадь</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=P}" >Периметр</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=P}" Width="240">Периметр</GridViewColumn>
                 </GridView>
             </ListView.View>
             <ScrollViewer Height="100" Width="100"/>
