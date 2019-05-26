@@ -10,12 +10,12 @@
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0" Background="#FF767676">
             <Button Content="Файл" Margin="0,0,0,0.8" Width="52" Background="#FF767676" Click="Button_Click"/>
         </StackPanel>
-        <ListView HorizontalAlignment="Left" Height="294" Margin="27,50,0,0" VerticalAlignment="Top" Width="741">
+        <ListView Name="ListV" HorizontalAlignment="Left" Height="294" Margin="27,50,0,0" VerticalAlignment="Top" Width="741">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=Tops}" Width="240">Количество вершин</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=S}" Width="240">Площадь</GridViewColumn>
-                    <GridViewColumn DisplayMemberBinding="{Binding Path=P}" Width="240">Периметр</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=Tops}" Width="140">Количество вершин</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=S}" Width="140">Площадь</GridViewColumn>
+                    <GridViewColumn DisplayMemberBinding="{Binding Path=P}" >Периметр</GridViewColumn>
                 </GridView>
             </ListView.View>
             <ScrollViewer Height="100" Width="100"/>
