@@ -27,6 +27,7 @@ namespace Pract3
     /// Логика (её нет) взаимодействия для MainWindow.xaml
     /// </summary>
 
+     
     public class Information
     {
         public int[] Coordinates { get; set; }
@@ -35,11 +36,18 @@ namespace Pract3
         public double P { get; set; }
     }
 
+    /// <summary>
+    /// Класс со списком и методами для передачи значений
+    /// </summary>
     public class Data : Window
     {
         public string FileName { get; set; }
         public int[] Coord;
         public List<Information> list = new List<Information>();
+        /// <summary>
+        /// Метод заполнения списка
+        /// </summary>
+        /// <param name="coord">массив координат</param>
         public void AddCoordinates(int[] coord)
         {
             list.Add(new Information());
@@ -49,32 +57,42 @@ namespace Pract3
             list[list.Count - 1].S = CalculateS(list[list.Count - 1].Tops, coord);
         }
 
-        //Метод расчета периметра
+        /// <summary>
+        /// Метод расчета периметра
+        /// </summary>
+        /// <param name="x"> количество пар значений х и у</param>
+        /// <param name="coord"> массив значений</param>
+        /// <returns></returns>
         private double CalculateP(int x, int[] coord)
         {
             double result = 0;
             if (x == 1)
             {
-                //Добавить что-то
+                MessageBox.Show("Ошибка");
             }
             else
             {
-                for (int i = 0; i < (x-1)*2; i+=2)
+                for (int i = 0; i < (x - 1) * 2; i += 2)
                 {
-                    result += Linelength(coord[i], coord[i+1], coord[i+2], coord[i+3]);
+                    result += Linelength(coord[i], coord[i + 1], coord[i + 2], coord[i + 3]);
                 }
-                result += Linelength(coord[0] ,coord[1] ,coord[coord.Length-2], coord[coord.Length-1]);
+                result += Linelength(coord[0], coord[1], coord[coord.Length - 2], coord[coord.Length - 1]);
             }
             return result;
         }
 
-        //Метод расчета площади
+        /// <summary>
+        /// Метод расчета площади
+        /// </summary>
+        /// <param name="x">количество пар значений х и у в массиве</param>
+        /// <param name="coord">массив значений</param>
+        /// <returns></returns>
         private double CalculateS(int x, int[] coord)
         {
             double result = 0;
             if (x == 1 || x == 2)
             {
-                //Добавить что-то
+                MessageBox.Show("Ошибка");
             }
             else
             {
@@ -83,61 +101,102 @@ namespace Pract3
             return result;
         }
 
-        //Расчет длины стороны
+        /// <summary>
+        /// Расчет длины стороны
+        /// </summary>
+        /// <param name="x1">х первой координаты</param>
+        /// <param name="y1">у первой координаты</param>
+        /// <param name="x2">х второй координаты</param>
+        /// <param name="y2">у второй координаты</param>
+        /// <returns></returns>
         private double Linelength(int x1, int y1, int x2, int y2)
         {
-            double result = Math.Sqrt(Math.Pow((x1-x2),2) + Math.Pow((y1-y2),2));
+            double result = Math.Sqrt(Math.Pow((x1 - x2), 2) + Math.Pow((y1 - y2), 2));
             return result;
         }
 
-        //Расчет площади 
+        /// <summary>
+        /// Расчет площади 
+        /// </summary>
+        /// <param name="coord">массив значений</param>
+        /// <returns></returns>
         private double Square(int[] coord)
         {
             double result = 0;
             if (coord.Length / 2 > 3)
             {
                 result = (SumCoord(coord) + (coord[coord.Length - 2] * coord[1]) - DiffCoord(coord) - (coord[0] * coord[coord.Length - 1])) / 2;
-            } else { result = ((coord[0] - coord[4]) *(coord[3] - coord[5]) - (coord[2] - coord[4]) *(coord[1] - coord[5])) / 2; }
+            }
+            else { result = ((coord[0] - coord[4]) * (coord[3] - coord[5]) - (coord[2] - coord[4]) * (coord[1] - coord[5])) / 2; }
             return Math.Abs(result);
         }
 
+        /// <summary>
+        /// Сумма множителей
+        /// </summary>
+        /// <param name="coord"> массив значений</param>
+        /// <returns></returns>
         private double SumCoord(int[] coord)
         {
             double res = 0;
             int count = coord.Length;
-            for (int i = 0; i < count-2; i+=2)
+            for (int i = 0; i < count - 2; i += 2)
             {
-                res += (coord[i]* coord[i+3]);
+                res += (coord[i] * coord[i + 3]);
             }
             return res;
         }
 
+        /// <summary>
+        /// Разность множителей
+        /// </summary>
+        /// <param name="coord">массив значений</param>
+        /// <returns></returns>
         private double DiffCoord(int[] coord)
         {
             double res = 0;
             int count = coord.Length;
-            for (int i = 1; i < count-2; i +=2)
+            for (int i = 1; i < count - 2; i += 2)
             {
                 res += (coord[i + 1] * coord[i]);
             }
             return res;
         }
 
+        /// <summary>
+        /// Метод возвращающий количество вершин
+        /// </summary>
+        /// <param name="index">индекс</param>
+        /// <returns></returns>
         public int OutputTops(int index)
         {
             return list[index].Tops;
         }
 
+        /// <summary>
+        /// Метод возвращающий площадь
+        /// </summary>
+        /// <param name="index">индекс</param>
+        /// <returns></returns>
         public double OutputS(int index)
         {
             return list[index].S;
         }
 
+        /// <summary>
+        /// Метод возвращающий периметр
+        /// </summary>
+        /// <param name="index">индекс</param>
+        /// <returns></returns>
         public double OutputP(int index)
         {
             return list[index].P;
         }
 
+        /// <summary>
+        /// Метод возвращающий количество элементов в списке
+        /// </summary>
+        /// <returns></returns>
         public int Count()
         {
             return list.Count;
@@ -153,7 +212,11 @@ namespace Pract3
             InitializeComponent();
         }
 
-        //Обработчик на открытие диалогового окна
+        /// <summary>
+        /// Обработчик на открытие диалогового окна
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             Microsoft.Win32.OpenFileDialog dialog = new Microsoft.Win32.OpenFileDialog();
@@ -166,7 +229,11 @@ namespace Pract3
             }
         }
 
-        //Обработчик считывания и вывода информации
+        /// <summary>
+        /// Обработчик считывания и вывода информации
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             if (data.FileName != null)
@@ -177,19 +244,31 @@ namespace Pract3
             else { MessageBox.Show("Не выбран файл"); }
         }
 
-        //Считывание
+        /// <summary>
+        /// Считывание
+        /// </summary>
         private void Reader()
         {
             StreamReader reader = File.OpenText(data.FileName);
             string input;
             while ((input = reader.ReadLine()) != null)
             {
-                int[] coordinates = input.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => int.Parse(x)).ToArray();
-                data.AddCoordinates(coordinates);
+                try
+                {
+                    int[] coordinates = input.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => int.Parse(x)).ToArray();
+                    data.AddCoordinates(coordinates);
+                }
+                catch (InvalidCastException)
+                {
+
+                }
             }
         }
 
-        public void OutputList ()
+        /// <summary>
+        /// Вывод
+        /// </summary>
+        public void OutputList()
         {
             for (int i = 0; i < data.Count(); i++)
             {
