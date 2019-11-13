@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Pract3"
         mc:Ignorable="d"
-        Title="MainWindow" Height="430" Width="800">
+        Title="MainWindow" Height="430" Width="800" ResizeMode="NoResize">
     <Grid Background="#FFB7B7B7">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Height="25" VerticalAlignment="Top" Width="794" Margin="0,0,-0.4,0" Background="#FF767676">
             <Button Content="Файл" Margin="0,0,0,0.8" Width="52" Background="#FF767676" Click="Button_Click"/>
@@ -21,6 +21,7 @@
             <ScrollViewer Height="100" Width="100"/>
         </ListView>
         <Button Content="Вывод" HorizontalAlignment="Left" Margin="363,361,0,0" VerticalAlignment="Top" Width="75" Click="Button_Click_1"/>
-
+        <Label Content="Обработано строк:" HorizontalAlignment="Left" Margin="45,365,0,0" VerticalAlignment="Top" Width="122"/>
+        <TextBlock Name="progress"  HorizontalAlignment="Left" Margin="184,370,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="96"/>
     </Grid>
 </Window>

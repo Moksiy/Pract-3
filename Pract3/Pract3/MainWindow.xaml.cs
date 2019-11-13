@@ -39,7 +39,7 @@ namespace Pract3
     /// <summary>
     /// Класс со списком и методами для передачи значений
     /// </summary>
-    public class Data : Window
+    public class Data
     {
         public string FileName { get; set; }
         public int[] Coord;
@@ -201,6 +201,11 @@ namespace Pract3
         {
             return list.Count;
         }
+
+        public void Clear()
+        {
+            list.Clear();
+        }
     }
 
     public partial class MainWindow : Window
@@ -234,53 +239,66 @@ namespace Pract3
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
+        private async void Button_Click_1(object sender, RoutedEventArgs e)
+        {           
             if (data.FileName != null)
             {
-                Reader();
-                OutputList();
+                await Task.Run(()=>Start());                
             }
             else { MessageBox.Show("Не выбран файл"); }
         }
+
+        delegate void MyDeleGate(int count);
+        delegate void MyDelegate2();
+
+        private void Start()
+        {
+            data.Clear();   
+            Reader();
+            this.Dispatcher.BeginInvoke(new MyDelegate2(OutputList), null);
+        }      
 
         /// <summary>
         /// Считывание
         /// </summary>
         private void Reader()
         {
+            int count = 0;
+            void OutputCount(int count2)
+                {
+                progress.Text = Convert.ToString(count2);
+            }            
             StreamReader reader = File.OpenText(data.FileName);
             string input;
             while ((input = reader.ReadLine()) != null)
-            {
+            {               
                 try
                 {
                     int[] coordinates = input.Split(' ').Where(x => !string.IsNullOrWhiteSpace(x)).Select(x => int.Parse(x)).ToArray();
                     data.AddCoordinates(coordinates);
-                }
-                catch (InvalidCastException)
-                {
-
-                }
+                    count++;
+                    if (count%1000==0) this.Dispatcher.BeginInvoke(new MyDeleGate(OutputCount), new object[] {count});
+                }               
+                catch (InvalidCastException){}
             }
-        }
+        }        
 
         /// <summary>
         /// Вывод
         /// </summary>
         public void OutputList()
-        {
+        {            
+            ListV.ItemsSource = null;
+            ListV.Items.Clear();
+            List<Information> list = new  List<Information>();
+            list.Clear();
             for (int i = 0; i < data.Count(); i++)
             {
-                Information element = new Information()
-                {
-                    Tops = data.OutputTops(i),
+                list.Add(new Information{Tops = data.OutputTops(i),
                     S = data.OutputS(i),
-                    P = data.OutputP(i)
-                };
-
-                ListV.Items.Add(element);
+                    P = data.OutputP(i)});
             }
+            ListV.ItemsSource = list;                
         }
     }
 }
